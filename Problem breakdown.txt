@@ -1,0 +1,106 @@
+==== patterns used ===
+
+- decomposition by subdomian - domian driven design -- here, we apply single responsibility principle(srp)
+- api gateway pattern (graphql) -- it also contains aggretator pattern
+- Client-Side UI Composition Pattern (maybe, not necessarily)
+- Database per Service
+- saga patttern (obviously since we using docker + k8s)
+
+- Asynchronous messaging (works well with kafka)
+- Event-driven asynchronous updates (for communication between services, uses kafka)
+- Circuit Breaker Pattern (for relibility purposes, but not highly prioritized)
+
+
+
+=== the prolem breakdown ===
+
+application -- student supervior HOD
+
++ student wants to apply (submits form)
++ supervisor browse the applications and express his/her interests.
++ HOD then compiles the augmented list (applications and supervisor interests).
++ The applicants whose application received interest will be invited for an interview.
++ student finishes application
+
+
+proposal -- student HOD HDC FIE 
+
++ panel members prescribe time for student proposal submission
++ student hands in proposal draft, which is then reviewed by supervisor
++ FIEs are assigned by HOD to evaluate it
++ The faculty HDC representative can view the proposal or upload the resolution from HDC after evaluation by the committee.
+- student hands in final proposal and get accepted 
++  When HDC approves a proposal, the HOD will change the student status with the mention *final admission*.
+
+
+thesis -- student supervior
+
++ after research, studtn hands in draft of thesis
++ supervisor approves it
++ final thesis version gets accepted
++ he HOD will then send the thesis to the *appointed* external examiner(s) and await their assessment.
+
+examination --student external examiner HDC supervisor
+
++ At the end of the process, a successful student's status will change to *graduate*. 
++ student graduates
+
+
+
+
+== this just list users in the system ==
+
+users {student, Head of Department (HOD),Dean , Faculty Internal Examiner (FIE), supervisor, Higher Degree Committee (HDC)}
+.Any External Supervisor (or External Examiner) is not included in the System.
+
+
+
+=== classes / tables / services ===
+
+User::
+-name
+-lastname
+-username
+-password
+-email
+-role
+
+
+
+student::
+-student number
+-supervisor
+-skills/specialism : array
+-status
+
+
+staff::
+-staff id
+
+
+
+supervisor::
+-skills/specialism : array
+
+
+
+
+
+=== kafka topics ===
+
+
+=== services ===
+.the services handle processes in their respective phases e.g application for application stage
+
+
+
+application management
+
+
+examination management
+
+
+proposal management
+
+
+thesis management
