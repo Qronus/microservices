@@ -55,7 +55,7 @@ users {student, Head of Department (HOD),Dean , Faculty Internal Examiner (FIE),
 
 
 
-=== classes / tables / services ===
+=== classes / tables ===
 
 User::
 -name
@@ -83,15 +83,15 @@ supervisor::
 -skills/specialism : array
 
 
+=== kafka ===
+.for each user, there would be a producer and consumer
 
-
-
-=== kafka topics ===
 
 
 === services ===
 .the services handle processes in their respective phases e.g application for application stage
-
+.each user has a respective service
+.below is the classification of the services
 
 
 application management
