@@ -44,6 +44,7 @@ service graphql:Service /graphql on new graphql:Listener(8082){
         return "Candidate registered succesfully : " + name;
     }
 
+
 //proposal
     resource function get studentProposal(string studentNo, string background,string probStat,string ScopeLimit)  returns string {
         //Application form object
@@ -57,6 +58,7 @@ service graphql:Service /graphql on new graphql:Listener(8082){
                     "app_status": "sent"
                     
                 }};
+		
    //creating file 
        checkpanic io:fileWriteJson(jsonFilePath, jsonContent);
          byte[] serialisedMsg = form.toString().toBytes();
