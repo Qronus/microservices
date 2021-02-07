@@ -2,6 +2,10 @@ import ballerinax/kafka;
 import ballerina/io;
 import ballerina/log;
 
+
+
+
+
 kafka:ProducerConfiguration producerConfiguration = {
     bootstrapServers: "localhost:9092",
 
@@ -13,9 +17,11 @@ kafka:ProducerConfiguration producerConfiguration = {
 kafka:ConsumerConfiguration consumerConfiguration = {
 
     bootstrapServers: "localhost:9092",
+    
 
     groupId: "group-id",
     offsetReset: "earliest",
+    
 
     topics: ["studentApplication", "studentProposal", "studentThesis"]
 
@@ -28,7 +34,8 @@ public function supervisor() returns error? {
 
     consumer();
 
-    //select applicant
+
+    //Select applicant
     string message = "Hello World, Ballerina";
 
     check kafkaProducer->sendProducerRecord({
@@ -37,14 +44,16 @@ public function supervisor() returns error? {
 
     check kafkaProducer->flushRecords();
 
-    //review proposal
+
+    //Review proposal
     check kafkaProducer->sendProducerRecord({
                                 topic: "supervisorProposalReview",
                                 value: message.toBytes() });
 
     check kafkaProducer->flushRecords();
 
-    //approve thesis
+
+    //Approve thesis
     check kafkaProducer->sendProducerRecord({
                                 topic: "supervisorThesisApproval",
                                 value: message.toBytes() });
