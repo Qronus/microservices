@@ -21,6 +21,8 @@ kafka:ConsumerConfiguration consumerConfiguration = {
 
 };
 
+
+
 kafka:Consumer consumer = checkpanic new (consumerConfiguration);
 kafka:Producer kafkaProducer = checkpanic new (producerConfiguration);
 
@@ -28,7 +30,7 @@ public function student() returns error? {
 
     consumer();
 
-    //apply
+    //Apply
 
     string message = "Hello World, Ballerina";
 
@@ -38,12 +40,15 @@ public function student() returns error? {
 
     check kafkaProducer->flushRecords();
 
-    //propose
+    
+    //Propose
     check kafkaProducer->sendProducerRecord({
                                 topic: "studentProposal",
                                 value: message.toBytes() });
 
     check kafkaProducer->flushRecords();
+
+
 
     //upload proposal
     check kafkaProducer->sendProducerRecord({
@@ -52,7 +57,10 @@ public function student() returns error? {
 
     check kafkaProducer->flushRecords();
 
+
+
     //thesis
+    
     check kafkaProducer->sendProducerRecord({
                                 topic: "studentThesis",
                                 value: message.toBytes() });
